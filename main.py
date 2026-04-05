@@ -1,14 +1,3 @@
-"""
-main.py — Application entry point.
-
-What's here vs a junior's main.py:
-  - Lifespan handler (startup/shutdown) instead of @app.on_event (deprecated)
-  - Structured JSON logging
-  - Request timing middleware
-  - /health endpoint for Railway/Vercel health checks
-  - /cache/stats endpoint for observability
-  - CORS pulled from environment variable
-"""
 import os
 import time
 import logging
@@ -61,10 +50,9 @@ app = FastAPI(
 
 
 # ── CORS ─────────────────────────────────────────────────────────────────────
-
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS",
-    "http://localhost:3000,http://localhost:3001",
+    "https://quantdesk-frontend-hwn2.vercel.app,http://localhost:3000,http://localhost:3001",
 ).split(",")
 
 app.add_middleware(
@@ -74,7 +62,6 @@ app.add_middleware(
     allow_headers     = ["*"],
     allow_credentials = True,
 )
-
 
 # ── Request timing middleware ─────────────────────────────────────────────────
 
